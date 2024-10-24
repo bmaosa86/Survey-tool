@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income and Spending Survey</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px; /* Add some padding to the body */
+        }
+        h1 {
+            margin-bottom: 20px; /* Space between title and form */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 400px; /* You can adjust this width */
+            margin: 0; /* Remove auto margin to align to the left */
+        }
+        label {
+            margin-top: 10px;
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .form-row label {
+            flex: 1;
+        }
+        .form-row input[type="text"], 
+        .form-row input[type="number"] {
+            flex: 1;
+            margin-left: 10px;
+        }
+        .expense-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .expense-row input[type="checkbox"] {
+            margin-right: 10px;
+        }
+    </style>
+    <script>
+        function toggleAmountInput(checkboxId, amountInputId) {
+            const checkbox = document.getElementById(checkboxId);
+            const amountInput = document.getElementById(amountInputId);
+            amountInput.disabled = !checkbox.checked;
+            if (!checkbox.checked) {
+                amountInput.value = ""; // Clear the amount if checkbox is unchecked
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Income and Spending Survey</h1>
+    <form action="/submit" method="POST">
+        <div class="form-row">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+
+        <div class="form-row">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="total_income">Total Income:</label>
+            <input type="number" id="total_income" name="income" required>
+        </div>
+
+        <div>
+            <h3>Expenses</h3>
+            <div class="expense-row">
+                <input type="checkbox" id="utilities" name="utilities" value="1" onclick="toggleAmountInput('utilities', 'utilities_amount')">
+                <label for="utilities">Utilities</label>
+                <input type="number" id="utilities_amount" name="utilities_amount" placeholder="Amount" min="0" disabled>
+            </div>
+            <div class="expense-row">
+                <input type="checkbox" id="entertainment" name="entertainment" value="1" onclick="toggleAmountInput('entertainment', 'entertainment_amount')">
+                <label for="entertainment">Entertainment</label>
+                <input type="number" id="entertainment_amount" name="entertainment_amount" placeholder="Amount" min="0" disabled>
+            </div>
+            <div class="expense-row">
+                <input type="checkbox" id="school_fees" name="school_fees" value="1" onclick="toggleAmountInput('school_fees', 'school_fees_amount')">
+                <label for="school_fees">School Fees</label>
+                <input type="number" id="school_fees_amount" name="school_fees_amount" placeholder="Amount" min="0" disabled>
+            </div>
+            <div class="expense-row">
+                <input type="checkbox" id="shopping" name="shopping" value="1" onclick="toggleAmountInput('shopping', 'shopping_amount')">
+                <label for="shopping">Shopping</label>
+                <input type="number" id="shopping_amount" name="shopping_amount" placeholder="Amount" min="0" disabled>
+            </div>
+            <div class="expense-row">
+                <input type="checkbox" id="healthcare" name="healthcare" value="1" onclick="toggleAmountInput('healthcare', 'healthcare_amount')">
+                <label for="healthcare">Healthcare</label>
+                <input type="number" id="healthcare_amount" name="healthcare_amount" placeholder="Amount" min="0" disabled>
+            </div>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

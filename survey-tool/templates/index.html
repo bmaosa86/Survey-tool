@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Spending Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Income Spending Survey</h1>
+    <form action="/submit" method="post">
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="text" name="age" required placeholder="Enter your age">
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select name="gender" required>
+                <option value="">Select your gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="income">Total Income:</label>
+            <input type="number" name="income" required placeholder="Enter your total income">
+        </div>
+
+        <h3>Expenses</h3>
+        <div class="form-group">
+            <label for="utilities">
+                <input type="checkbox" name="utilities_check" id="utilities_check" value="1" onchange="toggleExpenseInput(this, 'utilities')"> Utilities
+            </label>
+            <input type="number" name="utilities" id="utilities" placeholder="Enter amount" min="0" disabled>
+        </div>
+        <div class="form-group">
+            <label for="entertainment">
+                <input type="checkbox" name="entertainment_check" id="entertainment_check" value="1" onchange="toggleExpenseInput(this, 'entertainment')"> Entertainment
+            </label>
+            <input type="number" name="entertainment" id="entertainment" placeholder="Enter amount" min="0" disabled>
+        </div>
+        <div class="form-group">
+            <label for="school_fees">
+                <input type="checkbox" name="school_fees_check" id="school_fees_check" value="1" onchange="toggleExpenseInput(this, 'school_fees')"> School Fees
+            </label>
+            <input type="number" name="school_fees" id="school_fees" placeholder="Enter amount" min="0" disabled>
+        </div>
+        <div class="form-group">
+            <label for="shopping">
+                <input type="checkbox" name="shopping_check" id="shopping_check" value="1" onchange="toggleExpenseInput(this, 'shopping')"> Shopping
+            </label>
+            <input type="number" name="shopping" id="shopping" placeholder="Enter amount" min="0" disabled>
+        </div>
+        <div class="form-group">
+            <label for="healthcare">
+                <input type="checkbox" name="healthcare_check" id="healthcare_check" value="1" onchange="toggleExpenseInput(this, 'healthcare')"> Healthcare
+            </label>
+            <input type="number" name="healthcare" id="healthcare" placeholder="Enter amount" min="0" disabled>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Function to enable/disable the amount input based on the checkbox state
+        function toggleExpenseInput(checkbox, expenseId) {
+            const amountField = document.getElementById(expenseId);
+            amountField.disabled = !checkbox.checked;
+            if (!checkbox.checked) {
+                amountField.value = ""; // Clear the input if checkbox is unchecked
+            }
+        }
+    </script>
+</body>
+</html>
